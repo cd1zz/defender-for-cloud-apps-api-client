@@ -2,6 +2,19 @@
 
 A comprehensive Python client library for interacting with the Microsoft Defender for Cloud Apps REST API with support for both personal API tokens and OAuth2 Client Credentials authentication.
 
+## What is Microsoft Defender for Cloud Apps?
+
+Microsoft Defender for Cloud Apps is a **Cloud Access Security Broker (CASB)** that provides comprehensive security monitoring and threat protection for cloud applications in your organization. The API enables programmatic access to:
+
+- **Security Monitoring** - Track user activities, file access patterns, and detect anomalous behavior across cloud apps
+- **Threat Detection & Response** - Identify, investigate, and remediate security alerts and incidents
+- **Risk Assessment** - Analyze user and entity risk scores using behavioral analytics and machine learning
+- **Cloud Discovery** - Monitor shadow IT by discovering unsanctioned cloud app usage across your network
+- **Data Protection** - Control file sharing, detect sensitive data exposure, and enforce DLP policies
+- **Compliance & Governance** - Audit cloud app usage and ensure adherence to corporate security policies
+
+This Python client library simplifies integration with the Defender for Cloud Apps API, enabling security automation, custom reporting, SIEM integration, and programmatic incident response.
+
 ## Features
 
 - **Complete API Coverage**: All 6 API endpoints with 58 methods (Activities, Alerts, Files, Entities, Cloud Discovery, Data Enrichment)

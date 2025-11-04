@@ -6,6 +6,7 @@ enrichment, allowing you to map IP ranges to organizational units and locations.
 """
 
 from typing import Any, Dict, List, Optional
+from .endpoints import APIEndpoints
 
 
 class DataEnrichmentAPI:
@@ -80,7 +81,7 @@ class DataEnrichmentAPI:
             "skip": skip
         }
 
-        response = self._client._make_request("POST", "v1/subnet", data=data)
+        response = self._client._make_request("POST", APIEndpoints.SUBNET_LIST, data=data)
         return response.get("data", [])
 
     def get_subnet(self, subnet_id: str) -> Dict[str, Any]:
@@ -114,7 +115,7 @@ class DataEnrichmentAPI:
             >>> subnet = data_enrichment.get_subnet("5f1234567890abcdef123456")
             >>> print(f"Subnet: {subnet['name']}, Org: {subnet['organization']}")
         """
-        response = self._client._make_request("GET", f"v1/subnet/{subnet_id}")
+        response = self._client._make_request("GET", APIEndpoints.SUBNET_DETAIL.format(subnet_id=subnet_id))
         return response.get("data", response)
 
     def create_subnet(
@@ -181,7 +182,7 @@ class DataEnrichmentAPI:
         if tags:
             data["tags"] = tags
 
-        response = self._client._make_request("POST", "v1/subnet", data=data)
+        response = self._client._make_request("POST", APIEndpoints.SUBNET_LIST, data=data)
         return response.get("data", response)
 
     def update_subnet(
@@ -233,7 +234,7 @@ class DataEnrichmentAPI:
         if tags is not None:
             data["tags"] = tags
 
-        response = self._client._make_request("PATCH", f"v1/subnet/{subnet_id}", data=data)
+        response = self._client._make_request("PATCH", APIEndpoints.SUBNET_UPDATE.format(subnet_id=subnet_id), data=data)
         return response.get("data", response)
 
     def delete_subnet(self, subnet_id: str) -> bool:
@@ -259,7 +260,7 @@ class DataEnrichmentAPI:
             ...     print("Subnet deleted successfully")
         """
         try:
-            self._client._make_request("DELETE", f"v1/subnet/{subnet_id}")
+            self._client._make_request("DELETE", APIEndpoints.SUBNET_DELETE.format(subnet_id=subnet_id))
             return True
         except Exception:
             return False

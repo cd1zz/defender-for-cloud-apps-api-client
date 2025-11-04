@@ -8,6 +8,7 @@ Note: This API is unavailable for Microsoft 365 Cloud App Security.
 """
 
 from typing import Any, Dict, List, Optional
+from .endpoints import APIEndpoints
 
 
 class FilesAPI:
@@ -122,7 +123,7 @@ class FilesAPI:
 
         response = self._client._make_request(
             "POST",
-            "/v1/files/",
+            APIEndpoints.FILES_LIST,
             data=data
         )
 
@@ -153,7 +154,7 @@ class FilesAPI:
             ... )
         """
         return self._client._paginate(
-            "/v1/files/",
+            APIEndpoints.FILES_LIST,
             filters=filters,
             limit=limit,
             skip=skip
@@ -174,7 +175,7 @@ class FilesAPI:
         """
         response = self._client._make_request(
             "GET",
-            f"/v1/files/{file_id}/"
+            APIEndpoints.FILES_DETAIL.format(file_id=file_id)
         )
 
         return response

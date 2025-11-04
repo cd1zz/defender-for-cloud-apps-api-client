@@ -6,6 +6,7 @@ including risk scores, behavioral analytics, and identity investigation data.
 """
 
 from typing import Any, Dict, List, Optional
+from .endpoints import APIEndpoints
 
 
 class EntitiesAPI:
@@ -122,7 +123,7 @@ class EntitiesAPI:
                 "sortDirection": sort_direction.lower()
             }
 
-        response = self._client._make_request("POST", "v1/entities", data=data)
+        response = self._client._make_request("POST", APIEndpoints.ENTITIES_LIST, data=data)
         return response.get("data", [])
 
     def get_entity(self, entity_id: str) -> Dict[str, Any]:
@@ -163,7 +164,7 @@ class EntitiesAPI:
             >>> entity = entities_api.get_entity("5f1234567890abcdef123456")
             >>> print(f"User: {entity['username']}, Risk Score: {entity['riskScore']}")
         """
-        response = self._client._make_request("GET", f"v1/entities/{entity_id}")
+        response = self._client._make_request("GET", APIEndpoints.ENTITIES_DETAIL.format(entity_id=entity_id))
         return response.get("data", response)
 
     def get_entity_by_username(

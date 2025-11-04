@@ -6,6 +6,7 @@ and enables automation of log uploads and blocking of unsanctioned apps.
 """
 
 from typing import Any, Dict, List, Optional
+from .endpoints import APIEndpoints
 
 
 class DiscoveryAPI:
@@ -55,7 +56,7 @@ class DiscoveryAPI:
         """
         response = self._client._make_request(
             "GET",
-            "discovery/streams/"
+            APIEndpoints.DISCOVERY_STREAMS
         )
 
         # The response might be a dict with data key or a list directly
@@ -134,7 +135,7 @@ class DiscoveryAPI:
 
         response = self._client._make_request(
             "POST",
-            "v1/discovery/discovered_apps/",
+            APIEndpoints.DISCOVERY_APPS_LIST,
             data=data
         )
 
@@ -314,7 +315,7 @@ class DiscoveryAPI:
 
         response = self._client._make_request(
             "POST",
-            "v1/discovery/discovered_apps/categories/",
+            APIEndpoints.DISCOVERY_CATEGORIES,
             data=data
         )
 
@@ -350,7 +351,7 @@ class DiscoveryAPI:
 
         response = self._client._make_request(
             "GET",
-            "discovery_block_scripts/",
+            APIEndpoints.DISCOVERY_BLOCK_SCRIPT,
             params=params
         )
 

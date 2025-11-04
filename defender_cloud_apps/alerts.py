@@ -6,6 +6,7 @@ Defender for Cloud Apps that require attention.
 """
 
 from typing import Any, Dict, List, Optional
+from .endpoints import APIEndpoints
 
 
 class AlertsAPI:
@@ -101,7 +102,7 @@ class AlertsAPI:
 
         response = self._client._make_request(
             "POST",
-            "/v1/alerts/",
+            APIEndpoints.ALERTS_LIST,
             data=data
         )
 
@@ -132,7 +133,7 @@ class AlertsAPI:
             ... )
         """
         return self._client._paginate(
-            "/v1/alerts/",
+            APIEndpoints.ALERTS_LIST,
             filters=filters,
             limit=limit,
             skip=skip
@@ -161,7 +162,7 @@ class AlertsAPI:
         """
         response = self._client._make_request(
             "GET",
-            f"/v1/alerts/{alert_id}/"
+            APIEndpoints.ALERTS_DETAIL.format(alert_id=alert_id)
         )
 
         return response
@@ -193,7 +194,7 @@ class AlertsAPI:
 
         response = self._client._make_request(
             "POST",
-            f"/v1/alerts/{alert_id}/close_benign/",
+            APIEndpoints.ALERTS_CLOSE_BENIGN.format(alert_id=alert_id),
             data=data
         )
 
@@ -226,7 +227,7 @@ class AlertsAPI:
 
         response = self._client._make_request(
             "POST",
-            f"/v1/alerts/{alert_id}/close_false_positive/",
+            APIEndpoints.ALERTS_CLOSE_FALSE_POSITIVE.format(alert_id=alert_id),
             data=data
         )
 
@@ -259,7 +260,7 @@ class AlertsAPI:
 
         response = self._client._make_request(
             "POST",
-            f"/v1/alerts/{alert_id}/close_true_positive/",
+            APIEndpoints.ALERTS_CLOSE_TRUE_POSITIVE.format(alert_id=alert_id),
             data=data
         )
 
@@ -280,7 +281,7 @@ class AlertsAPI:
         """
         response = self._client._make_request(
             "POST",
-            f"/v1/alerts/{alert_id}/read/"
+            APIEndpoints.ALERTS_MARK_READ.format(alert_id=alert_id)
         )
 
         return response
@@ -300,7 +301,7 @@ class AlertsAPI:
         """
         response = self._client._make_request(
             "POST",
-            f"/v1/alerts/{alert_id}/unread/"
+            APIEndpoints.ALERTS_MARK_UNREAD.format(alert_id=alert_id)
         )
 
         return response

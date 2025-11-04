@@ -6,6 +6,7 @@ of user logins, file downloads, and activity patterns.
 """
 
 from typing import Any, Dict, List, Optional
+from .endpoints import APIEndpoints
 
 
 class ActivitiesAPI:
@@ -96,7 +97,7 @@ class ActivitiesAPI:
 
         response = self._client._make_request(
             "POST",
-            "/v1/activities/",
+            APIEndpoints.ACTIVITIES_LIST,
             data=data
         )
 
@@ -127,7 +128,7 @@ class ActivitiesAPI:
             ... )
         """
         return self._client._paginate(
-            "/v1/activities/",
+            APIEndpoints.ACTIVITIES_LIST,
             filters=filters,
             limit=limit,
             skip=skip
@@ -148,7 +149,7 @@ class ActivitiesAPI:
         """
         response = self._client._make_request(
             "GET",
-            f"/v1/activities/{activity_id}/"
+            APIEndpoints.ACTIVITIES_DETAIL.format(activity_id=activity_id)
         )
 
         return response
@@ -186,7 +187,7 @@ class ActivitiesAPI:
 
         response = self._client._make_request(
             "POST",
-            f"/v1/activities/{activity_id}/feedback/",
+            APIEndpoints.ACTIVITIES_FEEDBACK.format(activity_id=activity_id),
             data=data
         )
 
